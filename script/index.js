@@ -1,1 +1,1 @@
-console.log("js file added")
+console.log("js file added with ")
