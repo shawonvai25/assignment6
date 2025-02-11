@@ -67,7 +67,7 @@
         </div>
 
         <button
-          class="my-5 py-2 px-3 text-white rounded-md font-normal text-sm bg-[#0E7A81]"
+          class="my-5 py-2 px-3 text-white rounded-md font-semibold text-sm bg-[#0E7A81] hover:scale-125"
         >
           View More
         </button>
@@ -79,7 +79,7 @@
     </section>
 
     <!-- adopt section start -->
-    <section class="adopt-section border-2 border-red-500 w-11/12 mx-auto">
+    <section class="adopt-section w-11/12 mx-auto">
       <div class="text-center">
         <h2 class="text-4xl font-semibold">Adopt Your Best Friend</h2>
         <p class="text-gray-500 w-1/2 text-center mx-auto mt-5">
@@ -92,11 +92,90 @@
 
     <!-- category section start -->
     <section
-      class="category-container flex border border-red-500 w-11/12 mx-auto justify-around"
+      class="category-container flex w-11/12 mt-5 mx-auto justify-around"
     ></section>
-    <main class="hidden">
+    <main class="mt-5">
       <section class="container"></section>
+
+      <!-- modal  -->
+
+      <!-- <button class="btn" onclick="customModal.showModal()">open modal</button> -->
+      <dialog id="customModal" class="modal"></dialog>
     </main>
+    <!-- footer section start -->
+    <footer class="w-full bg-black py-10 mt-5">
+      <section
+        class="w-11/12 block md:flex lg:flex justify-between mx-auto bg-black px-2"
+      >
+        <div class="text-white flex flex-col gap-6">
+          <div class="w-20 flex items-center">
+            <img class="w-[80px] h-[30px]" src="./images/logo.webp" alt="" />
+            <h1 class="text-3xl font-bold">Peddy</h1>
+          </div>
+          <div>
+            <p>
+              Location: av. Washington 165, NY CA <br />
+              54003
+            </p>
+            <p>Phone: +31 85 964 47 25</p>
+            <p>Email: info@yourdomain.com</p>
+            <p>Openings hours: 9.00 AM - 5.00 PM</p>
+            <div class="flex">
+              <div class="w-[50px]">
+                <img
+                  src="https://img.icons8.com/?size=96&id=114441&format=png"
+                  alt=""
+                />
+              </div>
+              <div class="w-[50px]">
+                <img
+                  src="https://img.icons8.com/?size=96&id=ClbD5JTFM7FA&format=png"
+                  alt=""
+                />
+              </div>
+              <div class="w-[50px]">
+                <img
+                  src="https://img.icons8.com/?size=96&id=19318&format=png"
+                  alt=""
+                />
+              </div>
+              <div class="w-[50px]">
+                <img
+                  src="https://img.icons8.com/?size=96&id=32323&format=png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col justify-center gap-6">
+          <h4 class="font-bold text-2xl text-white">Useful links</h4>
+          <div class="flex flex-col">
+            <a class="text-gray-400" href="">Home</a>
+            <a class="text-gray-400" href="">About Us</a>
+            <a class="text-gray-400" href=""> Animals</a>
+            <a class="text-gray-400" href="">Foundation</a>
+            <a class="text-gray-400" href="">Contact</a>
+          </div>
+        </div>
+        <div class="text-white flex flex-col gap-8">
+          <h4 class="text-2xl font-bold">Drop a message</h4>
+          <div class="flex flex-col gap-2">
+            <input
+              class="bg-gray-800 py-2 rounded-md text-center"
+              type="text"
+              placeholder="Enter your Email"
+            />
+            <button class="bg-[#0E7A81] py-2 rounded-md text-lg">
+              Subscribe
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <button>Okay man</button>
+    </footer>
 
     <!-- scripts -->
     <script src="./script/index.js"></script>
