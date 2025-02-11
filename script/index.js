@@ -67,7 +67,7 @@ const displayPets = (arrays) => {
 
   <hr class="w-4/5 mx-auto">
    
-  <p class=" text-gray-500" >${array.pet_details}</p>
+  <p class="-= text-gray-500" >${array.pet_details}</p>
 
     </div>
 
