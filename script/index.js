@@ -18,6 +18,30 @@ function buttonChange(btn) {
   btn.innerText = 'adopted';
 }
 
+/* sorted button functionality */
+
+const sortedDisplay = () => {
+const sortContainer = document.querySelector(".sortBtn-container");
+sortContainer.innerHTML = `
+<button
+id="sortBtn"
+class="mt-5 py-2 px-3 text-white rounded-md font-semibold text-sm bg-[#0E7A81] hover:scale-125 btn-viewMore"
+onclick ="displaySortedPrice()"
+>
+Sort by price
+</button>`;
+};
+sortedDisplay();
+
+
+const displaySortedPrice = async () => {
+const response  = await fetch('https://openapi.programming-hero.com/api/peddy/pets');
+const data  = await response.json();
+const infos = await (data.pets);
+const converted = await infos.sort((a,b) => a.price - b.price);
+
+displayPets(converted);
+};
 
  
 const displayPets = (arrays) => {
