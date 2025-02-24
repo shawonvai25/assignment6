@@ -1,18 +1,40 @@
 const loadAllFiles = async () => {
-  const response = await  fetch(`https://openapi.programming-hero.com/api/peddy/pets`);
+try {
+  const response = await fetch('https://openapi.programming-hero.com/api/peddy/pets');
+  if(!response.ok){
+    throw new Error(`HTTP error status: ${response.status}`);
+  }
   const data = await response.json();
   displayPets(data.pets);
+ }
+ catch(error){
+  console.error("Error happened",error);
+ }
+/*  */
+}
+const cardContainer = document.querySelector('.container');
+
+function buttonChange(btn) {
+  btn.innerText = 'adopted';
 }
 
-const buttonChange = (btn) => {
-    btn.innerText = 'adopted';
- };
 
+ 
 const displayPets = (arrays) => {
-    const cardContainer = document.querySelector('.container'); 
-    cardContainer.classList = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 w-11/12 mx-auto";   
-    arrays.forEach((array) => {      
+  cardContainer.innerHTML = "";
+    cardContainer.classList= "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-8/12 mx-auto"; 
+    if(arrays.length === 0 ){
+      cardContainer.classList = "w-full h-full flex flex-col items-center justify-center  "
+      cardContainer.innerHTML = `
+     
+      <img class=" h-[300px] w-[300px] mx-auto" src="../images/error.webp" />
+      <h2 class="font-bold text-3xl">No information available </h2>
+      `
+    }  
+    arrays.forEach((array) => {     
+      
      const div = document.createElement('div');
+      
      div.innerHTML = `
      <div class="card bg-base-100 w-80 shadow-xl border border-gray-200">
      <figure class="px-10 pt-10">
@@ -35,9 +57,9 @@ const displayPets = (arrays) => {
   <hr class="w-4/5 mx-auto">
 
      <div class="flex gap-7 px-1 mx-auto py-6">
-     <button class="w-[30px] hover:scale-75 border border-gray-300 rounded-md "><img  src="https://img.icons8.com/?size=48&id=82788&format=png" /></button>
+     <button onclick= "selectedPets(${array.petId})" class="w-[30px] hover:scale-75 border border-gray-300 rounded-md "><img  src="https://img.icons8.com/?size=48&id=82788&format=png" /></button>
      <button  onclick="buttonChange(this)" class="  border btn btn-outline btn-accent btn-sm  border-gray-300 rounded-md font-semibold text-[#0E7A81]">Adopt</button>
-     <button class="border btn btn-outline btn-accent btn-sm border-gray-300  rounded-md font-semibold text-[#0E7A81]"    onclick="showModalDetails()" >Details</button>
+     <button class="border btn btn-outline btn-accent btn-sm border-gray-300  rounded-md font-semibold text-[#0E7A81]"    onclick="showModalDetails(${array.petId})" >Details</button>
      </div>
    </div>
      `;
@@ -47,13 +69,13 @@ const displayPets = (arrays) => {
 };
 //-------------///
 
-const showModalDetails = async () => {
+const showModalDetails = async (id) => {
   
   try{
     const modalBox = document.getElementById("modal");
   
 
-  const response = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/1`);
+  const response = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`);
   const data = await response.json();
   console.log(data.petData);
   
@@ -68,6 +90,10 @@ const showModalDetails = async () => {
   <div class="card-body mx-auto">
   <h2 class="font-bold text-2xl">${data.petData.breed}</h2>
   </div>
+  </div>
+  <div>
+  <h3 class="font-bold text-lg">Details Information</h3>
+  <p>${data.petData.pet_details}</p>
   </div>
   <div class="modal-action  rounded-md">
     <form method="dialog " class="w-full ">
@@ -91,12 +117,37 @@ const showModalDetails = async () => {
 
 };
 
+//------------------
 
-const loadCategoryPets = (id) => {
-  fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
-  .then((res) => res.json() )
-  .then((data) => displayPets(data) )
-  .catch((error) => console.log(error) )
+const selectedPets = async (id) =>{
+const likedContainer = document.querySelector('.adopted-container');
+const response = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`);
+const data = await response.json();
+const img = document.createElement('img');
+img.src = (data.petData.image);
+img.classList.add("rounded-md");
+img.classList.add("mb-px")
+
+likedContainer.appendChild(img);
+
+};
+selectedPets();
+//--------------------
+
+
+
+const loadCategoryPets = async (id) => {
+ 
+  try{
+    const response = await  fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`);
+    const data  = await response.json();
+    displayPets(data.data)
+    console.log(data.data)
+   
+  }
+  catch(error){
+    console.error(error)
+  }
 };
 
 
@@ -114,8 +165,7 @@ const loadCategories = async () => {
 const displayCategories = (items) => {
     const categoryContainer = document.querySelector('.category-container');
     items.forEach((item) => {
-        // console.log(item)
-        console.log(item.category)
+       
 
         const button = document.createElement('button');
         button.innerHTML = `
