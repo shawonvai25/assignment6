@@ -148,7 +148,7 @@ const likedContainer = document.querySelector('.adopted-container');
 const response = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`);
 const data = await response.json();
 const img = document.createElement('img');
-img.src = (data.petData.image);
+img.src = data.petData.image;
 img.classList.add("rounded-md");
 img.classList.add("mb-px")
 
